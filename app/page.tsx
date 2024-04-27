@@ -1,7 +1,14 @@
-import Image from "next/image";
+import Navbar from "./navbar";
+import Timer from "./timer";
+import "./page.css"
 
 export default function Home() {
   return (
-    <h1>Hello World! Hi Rochelle!</h1>
+    <div>
+        <Navbar></Navbar>
+        <div className="extend">
+            <Timer></Timer>
+        </div>
+    </div>
   );
 }

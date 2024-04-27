@@ -1,0 +1,24 @@
+:root {
+    --navbar-height: 100px;
+}
+
+.spread-across {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10svw 0 10svw;
+    height: var(--navbar-height);
+    border-bottom: solid rgb(var(--foreground-rgb));
+}
+
+.title {
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+.right-side {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 125px;
+}
