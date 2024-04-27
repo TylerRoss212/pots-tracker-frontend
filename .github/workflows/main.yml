@@ -33,7 +33,7 @@ jobs:
         run: npm run build
 
       - name: See if build is there
-        run: ls
+        run: ls -a
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -43,7 +43,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy to S3
-        run: aws s3 sync ./next s3://pots-tracker-frontend
+        run: aws s3 sync ./.next s3://pots-tracker-frontend
 
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
