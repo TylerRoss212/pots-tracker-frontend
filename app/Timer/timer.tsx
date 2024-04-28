@@ -1,4 +1,4 @@
-import "./time.css"
+import "./timer.css"
 
 export default function Timer() {
     return(

@@ -4,6 +4,7 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
+  --border-rgb: 140, 140, 140;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 }
@@ -11,6 +12,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
+    --border-rgb: 200, 200, 200;
     --background-start-rgb: 16, 0, 16;
     --background-end-rgb: 6, 0, 6;
   }
