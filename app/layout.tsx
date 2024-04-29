@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Sono } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 
 const font = Sono({ subsets: ["latin"] });
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={font.className}>{children}</body>
+            <SessionProvider>
+                <body className={font.className}>{children}</body>
+            </SessionProvider>
         </html>
     );
 }

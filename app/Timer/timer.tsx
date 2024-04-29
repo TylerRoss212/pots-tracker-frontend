@@ -1,5 +1,6 @@
 "use client"
 import { useEffect } from "react";
+import { useSession, signIn } from "next-auth/react";
 import "./timer.css"
 
 export default function Timer() {
@@ -10,7 +11,7 @@ export default function Timer() {
     let startTime: number;
     let prevTotalMilliseconds = 0;
     let doReset = false;
-    let datetimeString: string;
+    let dateTimeString: string;
 
     let minElement: HTMLElement | null;
     let secElement: HTMLElement | null;
@@ -22,6 +23,8 @@ export default function Timer() {
     let minPopup: HTMLInputElement | null;
     let secPopup: HTMLInputElement | null;
     let msecPopup: HTMLInputElement | null;
+
+    const session = useSession();
 
     useEffect(() => {
         minElement = document.getElementById("min");
@@ -102,7 +105,6 @@ export default function Timer() {
     }
 
     function openSavePopup() {
-
         // update the values in the popup
         msecPopup!.value = millisecond.toLocaleString("en-US", { minimumIntegerDigits: 2 });
         secPopup!.value = second.toLocaleString("en-US", { minimumIntegerDigits: 2 });
@@ -122,11 +124,24 @@ export default function Timer() {
         const seconds = ('0' + date.getSeconds()).slice(-2);
 
         // Construct DATETIME string
-        datetimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        dateTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 
     function cancelSave() {
         savePopup?.classList.add("hidden");
+    }
+
+    function handleFormSave() {
+        // if we aren't signed in, redirect to sign in
+        if (session.status != "authenticated") {
+            signIn();
+        }
+
+        // save to db
+
+        // show a green saved confirmation box on the bottom
+
+        // handle error
     }
 
     return(
@@ -149,7 +164,7 @@ export default function Timer() {
             </div>
             <div id="popup-wrapper" className="hidden popup-wrapper">
                 <div className="wrapper">
-                    <form className="popup">
+                    <form className="popup" onSubmit={handleFormSave}>
                         <div className="number-input-wrapper">
                             <input type="number" min={0} max={99} id="min-popup" className="number input" defaultValue="00" />
                             <span>:</span>
