@@ -1,4 +1,5 @@
 import Navbar from "../Navbar/navbar";
+import "./page.css";
 
 export default function About() {
     return(

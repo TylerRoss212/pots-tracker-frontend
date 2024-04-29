@@ -10,6 +10,7 @@ export default function Timer() {
     let startTime: number;
     let prevTotalMilliseconds = 0;
     let doReset = false;
+    let datetimeString: string;
 
     let minElement: HTMLElement | null;
     let secElement: HTMLElement | null;
@@ -101,10 +102,11 @@ export default function Timer() {
     }
 
     function openSavePopup() {
+
         // update the values in the popup
-        msecPopup!.defaultValue = millisecond.toLocaleString("en-US", { minimumIntegerDigits: 2 });
-        secPopup!.defaultValue = second.toLocaleString("en-US", { minimumIntegerDigits: 2 });
-        minPopup!.defaultValue = minute.toLocaleString("en-US", { minimumIntegerDigits: 2 });
+        msecPopup!.value = millisecond.toLocaleString("en-US", { minimumIntegerDigits: 2 });
+        secPopup!.value = second.toLocaleString("en-US", { minimumIntegerDigits: 2 });
+        minPopup!.value = minute.toLocaleString("en-US", { minimumIntegerDigits: 2 });
 
         savePopup?.classList.remove("hidden");
 
@@ -120,11 +122,7 @@ export default function Timer() {
         const seconds = ('0' + date.getSeconds()).slice(-2);
 
         // Construct DATETIME string
-        const datetimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-        // TODO
-        // Push time and date to database
-        // use 
+        datetimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 
     function cancelSave() {
