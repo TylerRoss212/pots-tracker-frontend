@@ -1,7 +1,9 @@
 "use client"
 import { useEffect } from "react";
-import { useSession, signIn } from "next-auth/react";
+import { handleFormSave } from "./handleFormSave";
+
 import "./timer.css"
+import { signIn, useSession } from "next-auth/react";
 
 export default function Timer() {
     let minute = 0;
@@ -23,6 +25,7 @@ export default function Timer() {
     let minPopup: HTMLInputElement | null;
     let secPopup: HTMLInputElement | null;
     let msecPopup: HTMLInputElement | null;
+    let commentField: HTMLInputElement | null;
 
     const session = useSession();
 
@@ -32,11 +35,12 @@ export default function Timer() {
         msecElement = document.getElementById("msec");
         startBtn = document.getElementById("start-btn");
         stopwatch = document.getElementById("stopwatch");
-        saveBtn = document.getElementById("save-btn")
+        saveBtn = document.getElementById("save-btn");
         savePopup = document.getElementById("popup-wrapper");
         minPopup = document.getElementById("min-popup") as HTMLInputElement;
         secPopup = document.getElementById("sec-popup") as HTMLInputElement;
         msecPopup = document.getElementById("msec-popup") as HTMLInputElement;
+        commentField = document.getElementById("comment") as HTMLInputElement;
     });
 
     function handleTimerClick() {
@@ -131,19 +135,22 @@ export default function Timer() {
         savePopup?.classList.add("hidden");
     }
 
-    function handleFormSave() {
-        // if we aren't signed in, redirect to sign in
-        if (session.status != "authenticated") {
+    async function handleFormSubmitt() {
+        let minuteString = minute.toLocaleString("en-US", { minimumIntegerDigits: 2 });
+        let secondString = second.toLocaleString("en-US", { minimumIntegerDigits: 2 });
+        let millisecondString = millisecond.toLocaleString("en-US", { minimumIntegerDigits: 2 });
+        let comment = commentField!.value;
+
+        if (session.status == "unauthenticated") {
             signIn();
+        } else {
+            let email = session.data!.user!.email!
+            await handleFormSave({ email, dateTimeString, minuteString, secondString, millisecondString, comment });
         }
 
-        // save to db
-
-        // show a green saved confirmation box on the bottom
-
-        // handle error
+        // show a green saved button
     }
-
+    
     return(
         <div>
             <div className="center">
@@ -164,7 +171,7 @@ export default function Timer() {
             </div>
             <div id="popup-wrapper" className="hidden popup-wrapper">
                 <div className="wrapper">
-                    <form className="popup" onSubmit={handleFormSave}>
+                    <form className="popup" onSubmit={handleFormSubmitt}>
                         <div className="number-input-wrapper">
                             <input type="number" min={0} max={99} id="min-popup" className="number input" defaultValue="00" />
                             <span>:</span>
@@ -172,7 +179,7 @@ export default function Timer() {
                             <span>:</span>
                             <input type="number" min={0} max={99} id="msec-popup" className="number input" defaultValue="00" />
                         </div>
-                        <input className="comment" type="text" maxLength={256} placeholder="Comment" />
+                        <input id="comment" className="comment" type="text" maxLength={255} placeholder="Comment" />
                         <div className="bottom-buttons">
                             <button type="button" className="popup-button" onClick={cancelSave}>CANCEL</button>
                             <button type="submit" className="popup-button">SAVE</button>

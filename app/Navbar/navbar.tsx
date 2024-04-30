@@ -4,7 +4,7 @@ import { auth, signIn, signOut } from "@/auth"
 import UsernameButton from "./username_button";
 
 export default async function Navbar() {
-    const session = await auth();
+    let session = await auth();
 
     return (
         <div className="spread-across">
@@ -18,7 +18,7 @@ export default async function Navbar() {
                             <Dropdown></Dropdown>
                         </div>
                     ) : (
-                        <Link href="/api/auth/signin"><button>Sign In</button></Link>
+                        <SignInButton></SignInButton>
                     )
                 }
             </div>
@@ -41,4 +41,15 @@ function Dropdown() {
             </div>
         </div>
     );
+}
+
+function SignInButton() {
+    return (
+        <form action={async () => {
+            "use server"
+            await signIn();
+        }}>
+            <button type="submit"> Sign In</button>
+        </form>
+    )
 }
