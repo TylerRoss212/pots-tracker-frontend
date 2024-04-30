@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sono } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
 
 const font = Sono({ subsets: ["latin"] });

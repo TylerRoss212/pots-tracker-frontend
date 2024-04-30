@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.0.10",
     "aws-sign-requests": "^0.4.0",
     "next": "14.2.3",
     "next-auth": "^5.0.0-beta.17",
