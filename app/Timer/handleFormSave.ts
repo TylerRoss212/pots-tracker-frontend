@@ -5,8 +5,8 @@ export async function handleFormSave({ email, dateTimeString, minuteString, seco
     // save to db
     let options = awsSignRequests({
         credentials: {
-            access_key: process.env.AWS_ACCESS_KEY_ID,
-            secret_key: process.env.AWS_SECRETKEY
+            access_key: process.env._AWS_ACCESS_KEY_ID,
+            secret_key: process.env._AWS_SECRETKEY
         },
         method: "PUT",
         url: (process.env.API_URL + "/save-new-time"),
