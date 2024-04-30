@@ -25,6 +25,6 @@ export async function handleFormSave({ email, dateTimeString, minuteString, seco
         }
     });
 
-    console.log("Sending to save-new-time: " + options);
-    fetch((process.env.API_URL + "/save-new-time"), options).then(res => console.log("Result from save-new-time: " + res));
+    console.log("Sending to save-new-time");
+    fetch((process.env.API_URL + "/save-new-time"), options).then(res => console.log("Result from save-new-time: " + JSON.stringify(res)));
 }
