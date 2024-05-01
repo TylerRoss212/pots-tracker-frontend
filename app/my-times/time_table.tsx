@@ -1,9 +1,16 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { deleteTime } from "./time_functions";
+
 import "./time_table.css";
 
 export default function TimeTable({ times }: { times: any }) {
     const [editingTimeId, setEditingTimeId] = useState<number | null>(null);
+    let popupWrapper: HTMLElement | null;
+
+    useEffect(() => {
+        popupWrapper = document.getElementById("popup-wrapper");
+    });
 
     function allowEdit(timeId: number) {
         setEditingTimeId(timeId);
@@ -14,7 +21,16 @@ export default function TimeTable({ times }: { times: any }) {
     }
 
     function handleDelete() {
-        setEditingTimeId(null);
+        popupWrapper?.classList.remove("hidden");
+    }
+
+    function cancelDelete() {
+        popupWrapper?.classList.add("hidden");
+    }
+
+    async function confirmDelete(id: number) {
+        await deleteTime(id);
+        location.reload();
     }
 
     function handleCancel() {
@@ -45,6 +61,19 @@ export default function TimeTable({ times }: { times: any }) {
                                     <button onClick={handleSave}>SAVE</button>
                                     <button onClick={handleCancel}>CANCEL</button>
                                     <button onClick={handleDelete}>DELETE</button>
+                                    <div id="popup-wrapper" className="popup-wrapper hidden">
+                                        <div className="wrapper">
+                                            <div className="popup">
+                                                <div className="popup-confirmation">Are you sure you want to delete this time?</div>
+                                                <div className="popup-date">{new Date(time.date_time).toLocaleString()}</div>
+                                                <TimeFormat time={time.time}></TimeFormat>
+                                                <div className="bottom-buttons">
+                                                    <button type="button" className="popup-button" onClick={cancelDelete}>CANCEL</button>
+                                                    <button type="submit" className="popup-button" onClick={() => { confirmDelete(time.time_id) }}>DELETE</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             ) : ( 
                                 <td>
