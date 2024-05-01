@@ -1,6 +1,5 @@
 import Navbar from "./Navbar/navbar";
 import Timer from "./Timer/timer";
-import "./page.css";
 
 export default function Home() {
     return (

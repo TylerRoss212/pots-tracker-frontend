@@ -30,7 +30,7 @@ function Dropdown() {
     return(
         <div id="dropdown-menu-wrapper" className="dropdown-menu-wrapper">
             <div className="dropdown-menu">
-                <button className="dropdown-item Link">My Times</button>
+                <Link href="/my-times" className="dropdown-item Link">My Times</Link>
                 <button className="dropdown-item extra-bottom-padding Link">Groups</button>
                 <form className="sign-out-line extra-bottom-padding max-width" action={async () => {
                     'use server';

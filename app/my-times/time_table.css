@@ -1,0 +1,56 @@
+/* time_table.css */
+
+/* Style the table */
+.table {
+    width: 100%;
+    max-width: 750px;
+    border-collapse: collapse;
+}
+
+/* Style table header cells */
+.table th {
+    padding: 8px;
+    text-align: left;
+    /* Align text to the left within header cells */
+    border-bottom: 1px solid #ddd;
+    /* Add a bottom border */
+}
+
+/* Style table data cells */
+.table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    /* Add a bottom border */
+}
+
+/* Optional: Style the SAVE and EDIT buttons */
+.table button {
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.table button:hover {
+    opacity: 60%;
+}
+
+.table th:first-child,
+.table td:first-child {
+    width: 250px;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 111px;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    padding-right: 12px;
+    width: auto;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+    width: auto;
+    text-align: right;
+}

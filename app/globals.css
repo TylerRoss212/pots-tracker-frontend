@@ -44,3 +44,15 @@ body {
     align-items: center;
     text-align: center;
 }
+
+.extend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100svh - var(--navbar-height));
+}
+
+::-webkit-scrollbar {
+    width: thin;
+    overflow-x: auto;
+}
