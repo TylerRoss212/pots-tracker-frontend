@@ -104,3 +104,13 @@
 .popup-date {
     padding: 12px 15px 12px 15px;
 }
+
+.editable {
+    -webkit-user-modify: read-write;
+    -moz-user-modify: read-write;
+}
+
+.time-field {
+    display: inline-block;
+    min-width: 20px;
+}
