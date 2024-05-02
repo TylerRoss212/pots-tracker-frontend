@@ -8,6 +8,17 @@ export default function TimeTable({ times }: { times: any }) {
     const [editingTimeId, setEditingTimeId] = useState<number | null>(null);
     let popupWrapper: HTMLElement | null;
 
+    const dateOptions = {
+        year: 'numeric',
+        month: 'numeric', 
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true, // Use 12-hour format with AM/PM
+        timeZone: 'UTC' // Set the timezone to UTC to display date consistently
+    }
+
     useEffect(() => {
         popupWrapper = document.getElementById("popup-wrapper");
     });
@@ -50,7 +61,10 @@ export default function TimeTable({ times }: { times: any }) {
             <tbody>
                 {times.map((time: { time_id: number; email: string; date_time: string; time: string; comment: string; }) => (
                     <tr key={time.time_id}>
-                        <td>{new Date(time.date_time).toLocaleString()}</td>
+                        <td>
+                            {/* @ts-ignore */}
+                            {Intl.DateTimeFormat('en-US', dateOptions).format(new Date(time.date_time))}
+                        </td>
                         <td>
                         <TimeFormat time={time.time}></TimeFormat>
                         </td>
@@ -65,7 +79,10 @@ export default function TimeTable({ times }: { times: any }) {
                                         <div className="wrapper">
                                             <div className="popup">
                                                 <div className="popup-confirmation">Are you sure you want to delete this time?</div>
-                                                <div className="popup-date">{new Date(time.date_time).toLocaleString()}</div>
+                                                <div className="popup-date">
+                                                    {/* @ts-ignore */ }
+                                                    {Intl.DateTimeFormat('en-US', dateOptions).format(new Date(time.date_time))}    
+                                                </div>
                                                 <TimeFormat time={time.time}></TimeFormat>
                                                 <div className="bottom-buttons">
                                                     <button type="button" className="popup-button" onClick={cancelDelete}>CANCEL</button>
@@ -88,10 +105,11 @@ export default function TimeTable({ times }: { times: any }) {
     );
 }
 
-function TimeFormat({ time }: { time: string }) {
+function TimeFormat({ time }: { time: string} ) {
     let minutes = time.substring(0, 2);
     let seconds = time.substring(2, 4);
     let millisecons = time.substring(4, 6);
+
     return (
         <div>
             <span>{minutes}</span>
