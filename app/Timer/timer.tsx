@@ -150,7 +150,7 @@ export default function Timer() {
         let millisecondString = millisecond.toLocaleString("en-US", { minimumIntegerDigits: 2 });
         let comment = commentField!.value;
 
-        if (session.status == "unauthenticated") {E
+        if (session.status == "unauthenticated") {
             signIn();
         } else {
             let email = session.data!.user!.email!
