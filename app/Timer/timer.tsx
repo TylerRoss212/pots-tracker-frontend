@@ -150,14 +150,12 @@ export default function Timer() {
         let millisecondString = millisecond.toLocaleString("en-US", { minimumIntegerDigits: 2 });
         let comment = commentField!.value;
 
-        if (session.status == "unauthenticated") {
+        if (session.status == "unauthenticated") {E
             signIn();
         } else {
             let email = session.data!.user!.email!
             await handleFormSave({ email, dateTimeString, minuteString, secondString, millisecondString, comment });
         }
-
-        // show a green saved button
     }
     
     return(

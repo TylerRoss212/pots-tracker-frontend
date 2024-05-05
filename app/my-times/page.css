@@ -3,7 +3,3 @@
     justify-content: center;
     align-items: center;
 }
-
-.extra-extend {
-    min-height: calc(100svh - var(--navbar-height));
-}

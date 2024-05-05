@@ -1,0 +1,23 @@
+.button {
+    border: thin solid rgb(var(--border-rgb));
+    border-radius: 8px;
+    padding: 12px;
+    margin: 60px;
+}
+
+.button:hover {
+    opacity: 60%;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.subtitle {
+    margin-bottom: 16px;
+    font-size: 40px;
+}
+
+.cell {
+    padding: 26px;
+}

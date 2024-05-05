@@ -31,7 +31,7 @@ function Dropdown() {
         <div id="dropdown-menu-wrapper" className="dropdown-menu-wrapper">
             <div className="dropdown-menu">
                 <Link href="/my-times" className="dropdown-item Link">My Times</Link>
-                <button className="dropdown-item extra-bottom-padding Link">Groups</button>
+                <Link href="/groups" className="dropdown-item extra-bottom-padding Link">Groups</Link>
                 <form className="sign-out-line extra-bottom-padding max-width" action={async () => {
                     'use server';
                     await signOut();
